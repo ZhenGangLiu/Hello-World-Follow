@@ -1,0 +1,81 @@
+<html lang="zh-cn">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta http-equiv="Cache-Control" content="no-siteapp" /> 
+	<style type="text/css">
+       .wrap {
+       	   margin-top: 100px;
+       	   margin-left: 600px;
+       }
+       input{
+       	   width: 300px;
+       	   height: 50px;
+       	   display: block;
+       	   margin-top: 20px;
+       	   text-align: center;
+       	   font-size: 40px;
+       	   line-height: 50px;
+       	   opacity: 0.8;
+       }
+       .main{
+           margin-left: -20px;
+       }
+       .rule{
+       	   width: 260px;
+       	   background-color: #fff;
+       	   padding: 10px;
+       	   border: 10px solid #aaa;
+       }
+	</style>
+	</head>
+    <body style="background:url(练习.jpg)">
+    	<div class="wrap">
+    		<h1 style="color:#fff;font-size:50px;">猜数字游戏</h1>
+    		<div class="main">
+    		    <input type="text" value="请输入数字">
+    		    <input type="text" id="number">
+    		    <div style="font-size:16px;width:300px;height:30px;background:#fff;margin:10px;margin-left:0px;" id="text"></div>
+    		    <input type="button" value="确定" onclick="javascript:btn();" id="button">
+                <div class="rule">
+                <p>游戏规则:</p>
+                系统随机产生一个0~100之间的随机数，玩家共有10次机会去猜，系统会提示相对于真实值的高低
+                </div>
+    		</div>
+    	</div>
+    </body>
+    <script type="text/javascript">
+        var math=Math.floor(Math.random()*100);
+        var i = 0;
+        var img="<img src='2.png'>";
+        function btn(){
+        	var text = document.getElementById("text");
+        	var val = document.getElementById("number").value;
+          var pattern = /[0-9]+/; 
+        	if ( !pattern.test(val) ){
+	        	alert("请输入数字");
+        	};
+  	    	if ( val == math ){
+  			    alert("恭喜你答对了");
+            text.innerHTML="";
+            for (var j = 0;j <= i;j++) {
+              text.innerHTML+="<img src='1.png'>";
+            }
+  		    };
+              if ( val > math ){
+  				alert("太大了");
+  				text.innerHTML+=img;
+  				i++;
+  			};
+  			if ( val < math ){
+  				alert("太小了");
+  				text.innerHTML+=img;
+  				i++;
+  			};
+  			if ( i === 10) {
+  				text.innerText="你没有机会了";
+  				document.getElementById("button").setAttribute("disabled","disabled");
+  			};
+      }
+    </script>
+</html>

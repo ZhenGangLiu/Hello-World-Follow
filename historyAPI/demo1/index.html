@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>history API</title>
+		<style type="text/css">
+			.container{
+				width: 500px;
+				height: 500px;
+				margin: 20px auto;
+				background: #ACBAE2;
+				text-align: center;
+				border: 1px solid #aaa;
+				box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+			}
+			#info{
+				margin: 20px;
+				height: 50px;
+				line-height: 50px;
+				background: red;
+				text-align: center;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container"> 
+			<p id="info"></p>
+			<a href="#page=3" id="next">3</a>
+		</div>
+		<script type="text/javascript" src="jq.js"></script>
+		<script type="text/javascript">
+			var getNumber = page => page === null ? 0 : page[1],
+				info  = document.getElementById("info");
+			document.getElementById("next").addEventListener("click", function (e) {
+			  e.preventDefault(); 
+				pageTrigger(this.href, ajaxRequest); 
+			}, false);
+			function pageTrigger (href, ajaxRequest) {
+				ajaxRequest = ajaxRequest || function () {};
+				var	pattern = /\#page\=([\d]+)/,
+					page = href.match(pattern);
+				page = getNumber(page);
+				ajaxRequest(page);
+			}
+			function ajaxRequest (num) {
+				if (num === 0) {
+					num = 1;
+				}
+				$.post(
+					"demo.php",
+					{num: num},
+					function (data) {
+						updateData(data, info);
+					}
+				)
+			}
+			function updateData (data, ele) {
+				data = JSON.parse(data);
+				ele.innerHTML = data.author + " say " + data.text;
+			}
+			window.addEventListener("load", function () {
+				pageTrigger(window.location.href, ajaxRequest);
+			}, false);
+		</script>
+	</body>
+</html>

@@ -27,23 +27,28 @@
 		<div class="container"> 
 			<h3>只是一个粗略版本分页,所以只有变换一个页数</h3>
 			<p id="info"></p>
-			<a href="#page=3" id="next">3</a>
+			<a href="#page=1" class="next">1</a>
+			<a href="#page=2" class="next">2</a>
+			<a href="#page=3" class="next">3</a>
 		</div>
 		<script type="text/javascript" src="../jq.js"></script>
 		<script type="text/javascript">
 			var getNumber = page => page === null ? 0 : page[1],
-				info  = document.getElementById("info");
-
-			document.getElementById("next").addEventListener("click", function (e) {
-			  e.preventDefault(); 
-				pageTrigger(this.href, ajaxRequest); 
-			}, false);
+				info  = document.getElementById("info"),
+				nexts = Array.from(document.getElementsByClassName("next"));
+			nexts.forEach( (val) => {
+				val.addEventListener("click", function (e) {
+				  e.preventDefault(); 
+					pageTrigger(this.href, ajaxRequest); 
+				}, false);
+			});
 
 			function pageTrigger (href, ajaxRequest) {
 				ajaxRequest = ajaxRequest || function () {};
 				var	pattern = /\#page\=([\d]+)/,
 					page = href.match(pattern);
 				page = getNumber(page);
+				window.history.pushState({page: page}, "", href);
 				ajaxRequest(page);
 			}
 
@@ -67,6 +72,11 @@
 
 			window.addEventListener("load", function () {
 				pageTrigger(window.location.href, ajaxRequest);
+			}, false);
+
+			window.addEventListener("popstate", function (e) {
+				var page = e.state.page;
+				ajaxRequest(page);
 			}, false);
 		</script>
 	</body>

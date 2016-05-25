@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>popState事件</title>
+	</head>
+	<body>	
+		<h3>按照顺序点，才能看出popState事件的严苛</h3>
+		<button>回到刚才页面</button>
+		<a href="#2">换个hash</a>
+		<button>回到改成页面</button>
+		<script type="text/javascript">
+			var btns = document.getElementsByTagName("button");
+			btns = Array.from(btns);
+			btns.forEach( (val) => {
+				val.addEventListener("click", () => window.history.back(), false);
+			});
+			window.addEventListener("popstate", function () {
+				alert("调用了popstate事件啦");
+			}, false); 
+		</script>
+	</body>
+</html>

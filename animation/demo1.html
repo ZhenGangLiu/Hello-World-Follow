@@ -24,7 +24,7 @@
 				img.src = imgUrl;
 				img.onload = () => {
 					ele.style.background = "url(" + imgUrl + ") no-repeat";
-					ele.style.backgroundPosition = pos[len - 1 - index].split(' ').join(' ');
+					ele.style.backgroundPosition = pos[len - 1 - index];
 					run();
 				};
 				function run () {

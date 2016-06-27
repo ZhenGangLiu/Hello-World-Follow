@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>demo 1</title>
+		<style type="text/css">
+			#test{
+				width: 102px;
+				height: 80px;
+				margin: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+		<script type="text/javascript">
+			var test = document.getElementById("test"),
+				imgUrl = "rabbit-big.png",
+				pos = ["0px -854px", "-174px -852px", "-349px -852px", "-524px -852px", "-698px -852px", "-873px -848px"];
+			(function (ele, pos, imgUrl) {
+				var img = new Image(), 
+					index = 0, 
+					len = pos.length;
+				img.src = imgUrl;
+				img.onload = () => {
+					ele.style.background = "url(" + imgUrl + ") no-repeat";
+					ele.style.backgroundPosition = pos[len - 1 - index].split(' ').join(' ');
+					run();
+				};
+				function run () {
+					setInterval(() => {
+						ele.style.backgroundPosition = pos[index++ % len];
+					}, 80);
+				}
+			})(test, pos, imgUrl);
+		</script>
+	</body>
+</html>

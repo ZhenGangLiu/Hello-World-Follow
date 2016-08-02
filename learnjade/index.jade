@@ -1,0 +1,7 @@
+extends layout
+block content
+	h1 this is a demo of jade, author is #{author}
+	h2 LsgoWeb members:
+	ul
+		each val, key in members
+			li #{val}级 #{key} 

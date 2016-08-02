@@ -1,0 +1,25 @@
+{
+  "name": "learnjade",
+  "version": "1.0.0",
+  "description": "jade学习demo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zp1996/Hello-World-Follow.git"
+  },
+  "keywords": [
+    "jade"
+  ],
+  "author": "zp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zp1996/Hello-World-Follow/issues"
+  },
+  "homepage": "https://github.com/zp1996/Hello-World-Follow#readme",
+  "dependencies": {
+    "jade": "^1.11.0"
+  }
+}

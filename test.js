@@ -1,38 +1,27 @@
 const EventEmitter = require("events"),
-	life = new EventEmitter();
-// life.on("work", () => {
-// 	console.log("sit down");
+	events = require("./events"),
+	life = new EventEmitter(),
+	work = new events();
+life.setMaxListeners(20);
+// console.log(zp, life);
+// zp.on("newListener", type => {
+// 	console.log(type + "add a new handle function");
 // });
-// life.on("work", () => {
-// 	console.log("open computer");
-// });
-// life.on("work", () => {
-// 	console.log("open sublime");
-// });
-// life.on("work", () => {
-// 	console.log("git log");
-// });
-// life.on("work", () => {
-// 	console.log("git pull");
-// });
-// life.on("work", () => {
-// 	console.log("coding");
-// });
-// life.on("work", () => {
-// 	console.log("git status");
-// });
-// life.on("work", () => {
-// 	console.log("git add .");
-// });
-// life.on("work", () => {
-// 	console.log("git commit");
-// });
-// life.on("work", () => {
-// 	console.log("git push");
-// });
-// life.on("work", () => {
-// 	console.log("check online");
-// });
-// life.emit("work");
+function pull () {
+	console.log("git pull");
+};
+work.on("removeListener", (type, fn) => {
+	console.log(`remove ${type} ${fn.name} event`);
+})
+work.on("git", pull);
+work.on("git", () => {
+	console.log("git status");
+});
+
+console.log(work.listenerCount("git"));
+
+work.removeListener("git", pull);
+work.emit("git");
+// console.log(zp);
 // life.emit("error", "zp1996");
 // console.log(new Error("test").context);

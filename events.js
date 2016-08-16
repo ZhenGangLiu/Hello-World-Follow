@@ -235,6 +235,35 @@ EventEmitter.prototype.addListener = function addListener (type, listener) {
 
 EventEmitter.prototype.on = EventEmitter.prototype.addListener;
 
+function _onceWrap (target, type, listener) {
+	var fired = false;
+	// 包裹listener
+	function g () {
+		// 执行时现将该函数移除,做到函数只被发布一次
+		target.removeListener(type, g);
+		if (!fired) {
+			fired = true;
+			listener.apply(target, arguments);
+		}
+	}
+	g.listener = listener;
+	return g;
+}
+
+EventEmitter.prototype.once = function once(type, listener) {
+  if (typeof listener !== 'function')
+    throw new TypeError('"listener" argument must be a function');
+  this.on(type, _onceWrap(this, type, listener));
+  return this;
+};
+
+EventEmitter.prototype.prependOnceListener = function prependOnceListener(type, listener) {
+  if (typeof listener !== 'function')
+    throw new TypeError('"listener" argument must be a function');
+  this.prependListener(type, _onceWrap(this, type, listener));
+  return this;
+};
+
 EventEmitter.prototype.prependListener = function prependListener (type, listener) {
 	return _addListener(this, type, listener, true);
 };

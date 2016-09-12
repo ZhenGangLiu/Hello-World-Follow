@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>MutationObserver</title>
+	</head>
+	<body>
+		<button id="add">Add</button>
+		<ul id="test"></ul>
+		<script type="text/javascript">
+			var MutationObserver = window.MutationObserver ||
+        window.WebKitMutationObserver || 
+        window.MozMutationObserver,
+        isSupport = !!MutationObserver,
+        ul = document.getElementById("test"), fn;
+			function callback () {
+			  console.log("触发了MutationObserver,执行回调");
+			};
+
+			function init () {
+				if (isSupport) {
+					var mo = new MutationObserver(callback);
+					var option = {
+					  'childList': true, 
+					  'subtree': true
+					};
+					mo.observe(test, option);
+				} else {
+					console.log(window.setImmediate);
+					var timerFunc = window.setImmediate || setTimeout;
+					fn = function () {
+						timerFunc(callback, 0);
+					}
+				}
+			}
+
+			window.onload = function () {
+				init();
+				var add = document.getElementById("add");
+				add.addEventListener("click", function () {
+					var fragment = document.createDocumentFragment();
+					for (var i = 0; i < 10; i++) {
+						var li = document.createElement("li");
+						li.innerText = i;
+						fragment.appendChild(li);
+					}
+					ul.appendChild(fragment);
+					if (!isSupport) {
+						fn();
+					}
+				}, false);
+			}
+		</script>
+	</body>
+</html>

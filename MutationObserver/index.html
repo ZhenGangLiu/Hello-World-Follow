@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+		<meta charset="utf-8" />
+		<title>简单的MVVM</title> 
+	</head>
+	<body>
+		<div id="app">
+		</div>
+		<script type="text/javascript" id="tpl">
+			<ul>
+				<% for (var i = 0; i < 10; i++) { %>
+					<li>
+						<%= i %>
+						<input type="text" value="<%= i %>" />
+					</li>
+				<% } %>
+			</ul>
+		</script>
+		<script type="text/javascript" src="stemplate.js"></script>
+	</body>
+</html>

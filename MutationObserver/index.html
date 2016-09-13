@@ -6,17 +6,22 @@
 	</head>
 	<body>
 		<div id="app">
+			<script type="text/javascript" id="tpl">
+				<div class="test">
+					<h1><%= msg %></h1>
+					<input type="text" value="<%= msg %>" />
+					<ul>
+						<% for (var i = 0; i < 5; i++) { %>
+							<% if (i === 0) { %>
+								<li><%= i %></li>
+							<% } else { %>
+								<li><%= (i + 11) %></li>
+							<% } %>
+						<% } %>
+					</ul>
+				</div>	
+			</script>
 		</div>
-		<script type="text/javascript" id="tpl">
-			<ul>
-				<% for (var i = 0; i < 10; i++) { %>
-					<li>
-						<%= i %>
-						<input type="text" value="<%= i %>" />
-					</li>
-				<% } %>
-			</ul>
-		</script>
 		<script type="text/javascript" src="stemplate.js"></script>
 	</body>
 </html>

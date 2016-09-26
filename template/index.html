@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+		<meta charset="utf-8" />
+		<title>简单的模板引擎</title>
+		<script type="text/javascript" src="tpl.js"></script>
+	</head>
+	<body>
+		<div id="tpl">
+			<div class="test">
+				<% var date = new Date(); %>
+				<h1><%= date %></h1>
+				<h1><%= msg %></h1>
+				<input type="text" value="<%= msg %>" />
+				<ul>
+					<% for (var i = 0; i < 5; i++) { %>
+						<% if (i === 0) { %>
+							<li><%= i %></li>
+						<% } else { %>
+							<li><%= (i + 11) %></li>
+						<% } %>
+					<% } %>
+				</ul>
+				<%= img_tag("./face.jpg") %>
+			</div>	
+		</div>
+		<script type="text/javascript">
+			tpl("#tpl", {
+				msg: "Hello World"
+			});
+		</script>
+	</body>
+</html>

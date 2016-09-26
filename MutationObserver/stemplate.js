@@ -37,6 +37,7 @@ function tpl2dom (tpl, data) {
 }
 var cacheDiv = document.createElement("div"),
 	MutationObserver = window.MutationObserver;
+
 /**
  * 将可用dom字符串转为dom节点
  *
@@ -66,7 +67,9 @@ function bindObject (obj, vm) {
 			},
 			set: function (val) {
 				obj[k] = val;
-				// vm.render();
+				console.log("data changed", val);
+				// 进行dom节点的更新
+
 			}
 		});
 	}

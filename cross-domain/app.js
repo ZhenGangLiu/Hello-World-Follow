@@ -19,7 +19,7 @@ const routes = {
 		// 注释下，下面示例后台代码补充在此处
 		if (req.method === "OPTIONS") {
 			res.writeHead(200, {
-				"Access-Control-Max-Age": 3000,
+				// "Access-Control-Max-Age": 3000,
 				"Access-Control-Allow-Origin": "*",
 				"Access-Control-Allow-Headers": "X-author",
 				"Content-Type": "application/json;charset=utf-8"

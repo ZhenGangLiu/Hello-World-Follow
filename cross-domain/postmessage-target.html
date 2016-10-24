@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>跨域演示</title>
+		<script type="text/javascript">
+			opener.postMessage("ok", opener.domain);
+		</script>
+	</head>
+	<body>
+		<div id="test">没有数据过来啊<div>
+		<script type="text/javascript">
+			var test = document.querySelector("#test");
+			window.addEventListener("message", (e) => {
+				if (e.origin !== "http://localhost") {
+					return void 0;
+				}
+				test.innerText = e.data;
+			});
+		</script>
+	</body>
+</html>

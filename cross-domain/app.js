@@ -7,6 +7,22 @@ const http = require("http"),
 		age: 20,
 		sex: "male"
 	};
+function cssData (id) {
+	return `
+		@keyframes a{
+			from{
+
+			}
+			to{
+				color: red;
+			}
+		}
+		#${id} {
+			content: "这种是很好，但是只能传输文本啊";
+			animation: a 2s;
+		}
+	`;
+}
 const routes = {
 	jsonp: (req, res, query) => {
 		res.writeHead(200, {
@@ -45,6 +61,12 @@ const routes = {
 				res.end("No！a bad boy~");
 			}
 		});
+	},
+	"data.css": function (req, res, query) {
+		res.writeHead(200, {
+			"Content-Type": "text/css"
+		});
+		res.end(cssData(query.id));
 	}
 }
 http.createServer((req, res) => {

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>跨域演示</title>
+	</head>
+	<body>
+		放在localhost下看
+		<script type="text/javascript">
+			var domain = "http://localhost",
+				index = 1,
+				target = window.open(`${domain}/postmessage-target.html`);
+			window.addEventListener("message", (e) => {
+				if (e.data === "ok")
+					send();
+				else 
+					console.log(e.data);
+			});
+			function send () {
+				setInterval(() => {
+					target.postMessage(`第${index++}次数据发送`, domain);
+				}, 1000);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>跨域演示</title>
+	</head>
+	<body>
+		打开控制台看请求到的数据
+		<div id="csst"></div>
+		<script type="text/javascript">
+			const id = "csst",
+				ele = document.querySelector(`#${id}`),
+				head = document.querySelector("head");
+			function getStyle (ele, prop) {
+				return getComputedStyle(ele, "").getPropertyValue(prop);
+			}
+			function loadCss (url) {
+				return new Promise((resolve) => {
+					const link = document.createElement("link");
+				  link.setAttribute("rel", "stylesheet");
+	        link.setAttribute("type", "text/css");
+	        link.setAttribute("href", url);
+	        ele.addEventListener("webkitAnimationStart", function () {
+	        	resolve(getStyle(ele, "content"));
+	        });
+	        head.appendChild(link);
+				});
+			}
+			loadCss(`http://localhost:666?page=data.css&id=${id}`).then((data) => {
+				console.log(data);
+			});
+ 		</script>
+	</body>
+</html>

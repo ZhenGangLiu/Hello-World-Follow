@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>跨域演示</title>
+	</head>
+	<body>
+		打开控制台看请求到的数据
+		<script type="text/javascript">
+			function jsonp (callback) {
+				var script = document.createElement("script"),
+					url = `http://localhost:666?page=jsonp&callback=${callback}`;
+				script.setAttribute("src", url);
+				document.querySelector("head").appendChild(script);
+			}
+			function show (data) {
+				console.log(`学生姓名为：${data.name}，年龄为：${data.age}，性别为：${data.sex}`);
+			}
+			jsonp("show");
+ 		</script>
+	</body>
+</html>
